@@ -12,6 +12,55 @@
  * @return int
  */
 
+//Why 5.0 is at second line
+float weight_pawn[BOARD_H][BOARD_W] ={
+    {0.0, 0.0, 0.0, 0.0, 0.0},
+    {5.0, 5.0, 5.0, 5.0, 5.0},
+    {1.0, 2.0, 3.0, 2.0, 1.0},
+    {0.0, 0.0, 2.0, 0.0, 0.0},
+    {0.5, 1.0, -2.0, 1.0, 0.5},
+    {0.0, 0.0, 0.0, 0.0, 0.0},
+};
+float weight_rook[BOARD_H][BOARD_W] ={
+    {0.0, 0.0, 0.0, 0.0, 0.0},
+    {0.5, 1.0, 1.0, 1.0, 0.5},
+    {-0.5, 0.0, 0.0, 0.0, -0.5},
+    {-0.5, 0.0, 0.0, 0.0, -0.5},
+    {-0.5, 0.0, 0.0, 0.0, -0.5},
+    {0.0, 0.0, 0.0, 0.0, 0.0},
+};
+float weight_knight[BOARD_H][BOARD_W] ={
+  {-5.0,-4.0,-3.0,-4.0,-5.0},
+  {-4.0,-2.0, 0.0,-2.0,-4.0},
+  {-3.0, 0.5, 1.5, 0.5,-3.0},
+  {-3.0, 0.5, 1.5, 0.5,-3.0},
+  {-4.0,-2.0, 0.5,-2.0,-4.0},
+  {-5.0,-4.0,-3.0,-4.0,-5.0},
+};
+float weight_bishop[BOARD_H][BOARD_W] ={
+  {-2.0,-1.0,-1.0,-1.0,-2.0},
+  {-1.0, 0.0, 0.0, 0.0,-1.0},
+  {-1.0, 0.5, 1.0, 0.5,-3.0},
+  {-1.0, 0.5, 1.0, 0.5,-3.0},
+  {-1.0, 1.0, 0.0, 1.0,-1.0},
+  {-2.0,-1.0,-1.0,-1.0,-2.0},
+};
+float weight_queen[BOARD_H][BOARD_W] ={
+  {-3.0,-4.0,-5.0,-4.0,-3.0},
+  {-3.0,-4.0,-5.0,-4.0,-3.0},
+  {-2.0,-3.0,-4.0,-3.0,-2.0},
+  {-1.0,-2.0,-2.0,-2.0,-1.0},
+  { 2.0, 2.0, 0.0, 2.0, 2.0},
+  { 2.0, 3.0, 0.0, 3.0, 2.0},
+};
+float weight_king[BOARD_H][BOARD_W] ={
+  {-2.0,-1.0,-0.5,-1.0,-2.0},
+  {-1.0, 0.0, 0.0, 0.0,-1.0},
+  {-0.5, 0.5, 0.5, 0.5,-0.5},
+  { 0.0, 0.5, 0.5, 0.5, 0.0},
+  {-1.0, 0.0, 0.0, 0.0,-1.0},
+  {-2.0,-1.0,-0.5,-1.0,-2.0},
+};
 int State::evaluate(){
   // [TODO] design your own evaluation function
   int value = 0;
@@ -20,17 +69,17 @@ int State::evaluate(){
     for(int j=0 ; j<BOARD_W ; j++){
       switch(nw.board[this->player][i][j]){
         case 1: //pawn
-          if(i == 0 || i == BOARD_H - 1) value += 3;
-          else value += 5;
+          if(i == 0 || i == BOARD_H - 1) value += 10;
+          else value += 12;
           break;
         case 2: //rook
-          value += 25 + 2 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
+          value += 30 + 2 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
           break;
         case 3: //knight
-          value += 35 + 3 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
+          value += 30 + 3 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
           break;
         case 4: //bishop
-          value += 45 + 4 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
+          value += 50 + 4 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
           break;
         case 5: //queen
           value += 90 + 2 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
@@ -43,17 +92,17 @@ int State::evaluate(){
       }
       switch(nw.board[1 - this->player][i][j]){
         case 1: //pawn
-          if(i == 0 || i == BOARD_H - 1) value -= 3;
-          else value -= 5;
+          if(i == 0 || i == BOARD_H - 1) value -= 10;
+          else value -= 12;
           break;
         case 2: //rook
-          value -= 25 + 2 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
+          value -= 30 + 2 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
           break;
         case 3: //knight
-          value -= 35 + 3 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
+          value -= 30 + 3 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
           break;
         case 4: //bishop
-          value -= 45 + 4 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
+          value -= 50 + 4 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
           break;
         case 5: //queen
           value -= 90 + 2 * (BOARD_H - 1 - abs((BOARD_H-1)/2.0 - i) + BOARD_W - 1 - abs((BOARD_W-1)/2.0 - j));
