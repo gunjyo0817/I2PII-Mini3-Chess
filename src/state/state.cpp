@@ -90,6 +90,7 @@ int State::evaluate(){
         default:
           break;
       }
+      /**/
       switch(nw.board[1 - this->player][i][j]){
         case 1: //pawn
           if(i == 0 || i == BOARD_H - 1) value -= 10;

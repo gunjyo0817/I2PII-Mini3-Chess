@@ -8,6 +8,6 @@
  */
 class Minimax{
 public:
-  static Move get_move(State *state, int depth);
-  static int get_minimax_score(State *state, int depth);
+  static Move get_move(State *state, int depth , bool isMaximise);
+  static int get_minimax_score(State *state, int depth, int alpha, int beta, bool isMaximise);
 };
