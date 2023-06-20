@@ -13,7 +13,7 @@
  */
 
 //Why 5.0 is at second line
-float weight_pawn[BOARD_H][BOARD_W] ={
+float weight_pawn[BOARD_H][BOARD_W]={
     {0.0, 0.0, 0.0, 0.0, 0.0},
     {5.0, 5.0, 5.0, 5.0, 5.0},
     {1.0, 2.0, 3.0, 2.0, 1.0},
@@ -21,7 +21,7 @@ float weight_pawn[BOARD_H][BOARD_W] ={
     {0.5, 1.0, -2.0, 1.0, 0.5},
     {0.0, 0.0, 0.0, 0.0, 0.0},
 };
-float weight_rook[BOARD_H][BOARD_W] ={
+float weight_rook[BOARD_H][BOARD_W]={
     {0.0, 0.0, 0.0, 0.0, 0.0},
     {0.5, 1.0, 1.0, 1.0, 0.5},
     {-0.5, 0.0, 0.0, 0.0, -0.5},
@@ -29,7 +29,7 @@ float weight_rook[BOARD_H][BOARD_W] ={
     {-0.5, 0.0, 0.0, 0.0, -0.5},
     {0.0, 0.0, 0.0, 0.0, 0.0},
 };
-float weight_knight[BOARD_H][BOARD_W] ={
+float weight_knight[BOARD_H][BOARD_W]={
   {-5.0,-4.0,-3.0,-4.0,-5.0},
   {-4.0,-2.0, 0.0,-2.0,-4.0},
   {-3.0, 0.5, 1.5, 0.5,-3.0},
@@ -37,7 +37,7 @@ float weight_knight[BOARD_H][BOARD_W] ={
   {-4.0,-2.0, 0.5,-2.0,-4.0},
   {-5.0,-4.0,-3.0,-4.0,-5.0},
 };
-float weight_bishop[BOARD_H][BOARD_W] ={
+float weight_bishop[BOARD_H][BOARD_W]={
   {-2.0,-1.0,-1.0,-1.0,-2.0},
   {-1.0, 0.0, 0.0, 0.0,-1.0},
   {-1.0, 0.5, 1.0, 0.5,-3.0},
@@ -45,7 +45,7 @@ float weight_bishop[BOARD_H][BOARD_W] ={
   {-1.0, 1.0, 0.0, 1.0,-1.0},
   {-2.0,-1.0,-1.0,-1.0,-2.0},
 };
-float weight_queen[BOARD_H][BOARD_W] ={
+float weight_queen[BOARD_H][BOARD_W]={
   {-3.0,-4.0,-5.0,-4.0,-3.0},
   {-3.0,-4.0,-5.0,-4.0,-3.0},
   {-2.0,-3.0,-4.0,-3.0,-2.0},
@@ -53,7 +53,7 @@ float weight_queen[BOARD_H][BOARD_W] ={
   { 2.0, 2.0, 0.0, 2.0, 2.0},
   { 2.0, 3.0, 0.0, 3.0, 2.0},
 };
-float weight_king[BOARD_H][BOARD_W] ={
+float weight_king[BOARD_H][BOARD_W]={
   {-2.0,-1.0,-0.5,-1.0,-2.0},
   {-1.0, 0.0, 0.0, 0.0,-1.0},
   {-0.5, 0.5, 0.5, 0.5,-0.5},
@@ -90,7 +90,6 @@ int State::evaluate(){
         default:
           break;
       }
-      /**/
       switch(nw.board[1 - this->player][i][j]){
         case 1: //pawn
           if(i == 0 || i == BOARD_H - 1) value -= 10;
